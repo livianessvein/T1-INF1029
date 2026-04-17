@@ -9,9 +9,6 @@
  * @author Trabalho 1 – 2026.1
  * @course PUC-Rio – Introdução à Arquitetura de Computadores
  *
- * Códigos de erro:
- * - Nenhum código de erro próprio neste módulo; erros de alocação/IO são tratados
- *   nos módulos comum.cpp e equation_test.cpp.
  */
 
 #include <stdio.h>
@@ -95,8 +92,6 @@ void processaVetores(data_t *hmA, data_t *hvB, int nIncognitas) {
             for (; coluna < nIncognitas; coluna++) {
                 linhaAtual[coluna] -= linhaPivo[coluna] * multiplicador;
             }
-
-
 
             /* Atualiza o vetor b escalarmente (um único elemento por linha) */
             hvB[linha] -= bPivo * multiplicador;
