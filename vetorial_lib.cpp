@@ -67,10 +67,12 @@ void processaVetores(data_t *hmA, data_t *hvB, int nIncognitas) {
              * Começa em passo-1 para incluir a coluna que será zerada e
              * garantir que a aritmética FMA seja consistente com a versão escalar.
              * ---------------------------------------------------------------- */
-            int coluna = passo - 1;
-            int limite = nIncognitas - 8; /* última posição segura para carregar 8 floats */
 
-            for (; coluna <= limite; coluna += 8) {
+            matriz(hmA, linha, passo - 1, nIncognitas) = 0.0f;
+            int coluna = passo;
+
+
+            for (; coluna + 7 < nIncognitas; coluna += 8) {
                 /* Carrega 8 floats da linha pivô e da linha atual */
                 __m256 vPivo  = _mm256_loadu_ps(&linhaPivo[coluna]);
                 __m256 vAtual = _mm256_loadu_ps(&linhaAtual[coluna]);
@@ -86,12 +88,15 @@ void processaVetores(data_t *hmA, data_t *hvB, int nIncognitas) {
                 _mm256_storeu_ps(&linhaAtual[coluna], vAtual);
             }
 
+
             /* ----------------------------------------------------------------
              * Tail escalar: colunas restantes (quando nIncognitas % 8 != 0)
              * ---------------------------------------------------------------- */
             for (; coluna < nIncognitas; coluna++) {
                 linhaAtual[coluna] -= linhaPivo[coluna] * multiplicador;
             }
+
+
 
             /* Atualiza o vetor b escalarmente (um único elemento por linha) */
             hvB[linha] -= bPivo * multiplicador;
