@@ -6,12 +6,10 @@
  * AVX (Advanced Vector Extensions) e FMA (Fused Multiply-Add) da biblioteca Intel
  * Intrinsics, processando 8 floats por ciclo para maximizar o throughput.
  *
- * @author Trabalho 1 – 2026.1
- * @course PUC-Rio Introdução à Arquitetura de Computadores
+ * Trabalho 1 – 2026.1
+ * Livian Essvein 2211667 e Breno Lois 2210780
+ * Introdução à Arquitetura de Computadores
  *
- * Códigos de erro:
- * - Nenhum código de erro próprio neste módulo; erros de alocação/IO são tratados
- *   nos módulos comum.cpp e equation_test.cpp.
  */
 
 #include <stdio.h>
